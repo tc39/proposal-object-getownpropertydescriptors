@@ -7,7 +7,7 @@
 
 This proposal is currently in stage 0 of [the TC39 process](https://github.com/tc39/ecma262/blob/master/stage0.md).
 
-This proposal could be identical to a `Reflect.getOwnPropertyDescriptors` one and for consistency with other plural versions, it's described as `Object` public static method.
+This proposal could be identical to a `Reflect.getOwnPropertyDescriptors` one but for consistency with other plural versions it's described as `Object` public static method.
 
 
 
