@@ -21,9 +21,11 @@ rm -rf ./*
 echo -n "$INDEX" > index.html
 
 # publish
-git add . > /dev/null 2>&1
-git commit -m 'automatically generated index.html' > /dev/null 2>&1
-git push --force > /dev/null 2>&1
+git add
+git commit -m 'automatically generated index.html'
+git push --force
 
 # switch it back
+git checkout master
+git checkout master
 git checkout master
