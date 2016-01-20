@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<pre class="metadata">
+title: Object.getOwnPropertyDescriptors
+status: proposal
+stage: 0
+location: https://github.com/WebReflection/Object.getOwnPropertyDescriptors
+copyright: false
+contributors: Andrea Giammarchi
+</pre>
+<script src="https://bterlson.github.io/ecmarkup/ecmarkup.js" defer></script>
+<link rel="stylesheet" href="https://bterlson.github.io/ecmarkup/elements.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
+
+<emu-clause id="object-get-own-property-descriptors">
+  <h1>Object.getOwnPropertyDescriptors( genericObject )</h1>
+
+  <p>When the getOwnPropertyDescriptors function is called, the following steps are taken:</p>
+
+  <emu-alg>
+    1. Let _obj_ be ToObject(_O_).
+    1. ReturnIfAbrupt(_obj_).
+    1. Let _keys_ be the result of calling the [[[OwnPropertyKeys](https://people.mozilla.org/%7Ejorendorff/es6-draft.html#sec-getownpropertykeys)]] internal method of _obj_.
+    1. ReturnIfAbrupt(_keys_).
+    1. Let _descriptors_ be the result of the abstract operation [ObjectCreate](https://people.mozilla.org/%7Ejorendorff/es6-draft.html#sec-objectcreate) with the intrinsic object %ObjectPrototype% as its argument.
+    1. Let _gotAllNames_ be __false__.
+    1. Repeat while _gotAllNames_ is __false__,
+      1. Let _next_ be the result of IteratorStep(_keys_).
+      1. ReturnIfAbrupt( _next_ ).
+      1. If _next_ is __false__, then let _gotAllNames_ be __true__.
+      1. Else,
+        1. Let _nextKey_ be IteratorValue(_next_).
+        1. Let _nextKey_ be ToPropertyKey(_nextKey_).
+        1. ReturnIfAbrupt(_nextKey_).
+        1. Let _desc_ be the result of calling the [[GetOwnProperty]] internal method of _obj_ with argument _nextKey_.
+        1. ReturnIfAbrupt(_desc_).
+        1. Let _descriptor_ be FromPropertyDescriptor(_desc_).
+        1. ReturnIfAbrupt(_descriptor_).
+        1. Let _status_ be the result of CreateDataProperty(_descriptors_, _nextKey_, _descriptor_).
+        1. Assert: _status_ is not an abrupt completion.
+    1. Return _descriptors_.
+  </emu-alg>
+
+</emu-clause>

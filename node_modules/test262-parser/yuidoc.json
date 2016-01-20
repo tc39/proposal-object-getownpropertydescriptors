@@ -1,0 +1,6 @@
+{
+  "options": {
+    "paths": "lib",
+    "outdir": "doc"
+  }
+}

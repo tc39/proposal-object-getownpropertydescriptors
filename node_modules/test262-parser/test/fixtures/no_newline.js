@@ -1,0 +1,2 @@
+// blah
+assert(true, true);
