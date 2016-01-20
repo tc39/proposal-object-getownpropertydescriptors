@@ -7,3 +7,23 @@ mkdir out;
 
 # run our compile script
 node_modules/ecmarkup/bin/ecmarkup.js spec.html out/index.html
+
+# grab content
+INDEX=$(cat out/index.html)
+
+# switch branch
+git checkout gh-pages
+
+# clean it up
+rm -rf ./*
+
+# create new index
+echo -n "$INDEX" > index.html
+
+# publish
+git add .
+git commit -m 'automatically generated index.html'
+git git push --force --quiet > /dev/null 2>&1
+
+# switch it back
+git checkout master
