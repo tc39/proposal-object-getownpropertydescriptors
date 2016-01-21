@@ -17,7 +17,7 @@
   "author": "Andrea Giammarchi",
   "license": "BSD-2-Clause",
   "devDependencies": {
-    "ecmarkup": "^2.5.1",
+    "ecmarkup": "^3.0.0",
     "test262-harness": "^1.2.0"
   }
 }
