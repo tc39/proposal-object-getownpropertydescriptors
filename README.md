@@ -75,6 +75,14 @@ Even if highly optimized, the amount of operations needed in order to obtain an 
 
 
 
+## FAQs
+
+### Should there be a `Reflect.getOwnPropertyDescriptors` ?
+
+Since the main goal of this proposal is to simplify some common boilerplate and be consistent with the fact there is a singular version of the method but not a plural one, it might be further consistent to have the plural version of the current [Reflect.getOwnPropertyDescriptor](http://www.ecma-international.org/ecma-262/6.0/#sec-reflect.getownpropertydescriptor) method too.
+
+
+
 
 ## Proposed Solution
 
