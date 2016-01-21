@@ -1,6 +1,11 @@
 # `Object.getOwnPropertyDescriptors` Proposal
 
 
+## Champion
+
+At stage 0 [Rick Waldron](https://github.com/rwaldron) agreed to champion this proposal.
+However the **current** official Champion is **[Jordan Harband](https://github.com/ljharb)**.
+
 
 
 ## Status
@@ -14,12 +19,17 @@ This proposal could be identical to a `Reflect.getOwnPropertyDescriptors` one bu
 
 ## Motivation
 
-There is not a single method in ECMAScript capable of simplifying the copy between two objects.
+There is not a single method in ECMAScript capable of simplifying a proper copy between two objects.
 In these days more than ever, where functional programming and immutable objects are essential parts of complex applications, every framework or library is implementing its own boilerplate in order to properly copy properties between composed objects or prototypes.
 
-Even if highly optimized, the amount of operations needed in order to obtain an object compatible with `Object.defineProperties` or with the second argument of `Object.create` is huge and it could be surely improved if performed directly in core.
+There is a lot of confusion and most of the time undesired behavior when it comes to fallback to `Object.assign` because it copies in a swallow way, accessing directly properties and symbols instead of their descriptors, discarding possible accessors which could result into an hazard when it come to compose more complex objects or classes' prototypes.
 
-There is also a lot of confusion and most of the time undesired behavior when it comes to fallback to `Object.assign` because it copies in a swallow way, accessed properties and symbols instead of their descriptors, discarding possible accessors which is an hazard when it come to compose prototype objects.
+Retrieving all descriptors, enumerables or not, is also key to implement composition over classes and their prototypes, since by default have non enumerable methods or accessors.
+
+Also decorators could easily grab at once all descriptors from another class or mixin and assign them through `Object.defineProperties`.
+Filtering undesired descriptors would be simpler too, as well as less repetitive each time is needed.
+
+Last, but not least, a shallow copy between two unknown objects would be free of surprises that `Object.assign` could bring.
 
 
 
@@ -30,6 +40,13 @@ There is also a lot of confusion and most of the time undesired behavior when it
 
 Since the main goal of this proposal is to simplify some common boilerplate and be consistent with the fact there is a singular version of the method but not a plural one, it might be further consistent to have the plural version of the current [Reflect.getOwnPropertyDescriptor](http://www.ecma-international.org/ecma-262/6.0/#sec-reflect.getownpropertydescriptor) method too.
 
+
+### Should the returned `descriptors` object be created from `null` instead of `Object.prototype` ?
+As mentioned in issue #5, it might look better to return an object that inherits `null` instead of `{}` but it won't conretely bring any real-world benefit to developers.
+When it comes to descriptors, specs are clear that it's about own properties, and not inherited one.
+What is problematic is either the data descriptor or the accessor one, both possibly influenced by inheritance so that `Object.prototype.writable = true` would make every accessor fail due presence or a `writable` field in its chain.
+
+Accordingly, I don't believe starting from a `null` object is needed since it won't fix the problem within each descriptor but it will easily be on developers way when it comes to debug such object or use `hasOwnProperty` while filtering or modifying it.
 
 
 
@@ -91,7 +108,9 @@ let d = mix(c).with(a, b);
 ```
 
 
-A boilerplate example capable of solving what `Object.assign` is not covering with current ES2015 capabilities is shown here:
+Let's say you wanted a version of Object.assign that uses `[[DefineOwnProperty]]`/`[[GetOwnProperty]]` instead of `[[Set]]`/`[[Get]]`, to avoid side effects and copy setters/getters, but still use enumerability as the distinguishing factor.
+
+Before this proposal, such a method would look like:
 ```js
 function completeAssign(target, ...sources) {
   sources.forEach(source => {
@@ -114,7 +133,7 @@ function completeAssign(target, ...sources) {
 }
 ```
 
-However, if `Object.getOwnPropertyDescriptors` was available, above boilerplate would look much simpler:
+However, if `Object.getOwnPropertyDescriptors` was available, above boilerplate would look like:
 ```js
 var completeAssign = (target, ...sources) =>
   sources.reduce((target, source) => {
