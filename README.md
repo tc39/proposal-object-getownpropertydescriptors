@@ -29,7 +29,7 @@ Retrieving all descriptors, enumerables or not, is also key to implement composi
 Also decorators could easily grab at once all descriptors from another class or mixin and assign them through `Object.defineProperties`.
 Filtering undesired descriptors would be simpler too, as well as less repetitive each time is needed.
 
-Last, but not least, a shallow copy between two unknown objects would be free of surprises that `Object.assign` could bring.
+Last, but not least, a shallow copy between two unknown objects would be free of surprises compared to what `Object.assign` would do.
 
 
 
