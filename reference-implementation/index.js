@@ -2,9 +2,12 @@
 
 if (typeof Reflect === 'undefined') {
   global.Reflect = {
+    defineProperty: Object.defineProperty,
+    getOwnPropertyDescriptor: Object.getOwnPropertyDescriptor,
     ownKeys: function ownKeys(genericObject) {
+      let gOPS = Object.getOwnPropertySymbols || function () { return []; };
       return Object.getOwnPropertyNames(genericObject)
-              .concat(Object.getOwnPropertySymbols(genericObject));
+              .concat(gOPS(genericObject));
     }
   };
 }
@@ -16,47 +19,48 @@ Object.defineProperty(
     configurable: true,
     writable: true,
     value: function getOwnPropertyDescriptors(genericObject) {
-      let keys;
-      // Let obj be ?ToObject(O)
+      // Let `obj` be ? `ToObject(O)`
       if (Object(genericObject) !== genericObject) {
         throw new Error('Argument should be an object');
       }
+
+      // Let `ownKeys` be the result of calling ? `obj.[[OwnPropertyKeys]]()`
+      let ownKeys; 
       try {
-        // Let keys be the result of calling the ?[[OwnPropertyKeys]]
-        // internal method of obj.
-        keys = Reflect.ownKeys(genericObject);
+        ownKeys = Reflect.ownKeys(genericObject);
       } catch(e) {
         throw new Error('Unable to retrieve own keys');
       }
-      // Let descriptors be the result of the abstract operation ObjectCreate
-      // with the intrinsic object %ObjectPrototype% as its argument.
-      let descriptors = {};
-      // Let gotAllNames be false.
-      let gotAllNames = keys.length === 0;
-      // Repeat while gotAllNames is false,
-      while (gotAllNames === false) {
-        // Let nextKey be ?IteratorValue(next).
-        // Let nextKey be ?ToPropertyKey(nextKey).
-        let nextKey = keys.shift();
-        // If next is false, then let gotAllNames be true.
-        gotAllNames = keys.length === 0;
-        if (nextKey === undefined) {
-          throw new Error('Unable to iterate over own keys');
-        }
-        // Let desc be the result of calling the ?[[GetOwnProperty]] internal method of obj with argument nextKey.
-        // Let descriptor be FromPropertyDescriptor(desc).
-        let descriptor = Object.getOwnPropertyDescriptor(genericObject, nextKey);
-        if (descriptor === undefined) {
-          throw new Error('Unable to retrieve own property descriptor');
-        }
-        // Let status be the result of ?CreateDataProperty(descriptors, nextKey, descriptor).
+
+      // Let `descriptors` be ? `ObjectCreate(%ObjectPrototype%)`
+      let descriptors;
+      try {
+        descriptors = Object.create(Object.prototype);
+      } catch(e) {
+        throw new Error('Unable to create an instance of Object.prototype');
+      }
+
+      // Repeat, for each element `key` of `ownKeys` in List order
+      for (let key of ownKeys) {
+
+        // Let `desc` be the result of ? `obj.[[GetOwnProperty]](key)`
+        // Let `descriptor` be ? `FromPropertyDescriptor(desc)`
+        let descriptor = Reflect.getOwnPropertyDescriptor(genericObject, key);
+
+        // Let `status` be the result of ? `CreateDataProperty(descriptors, key, descriptor)`
         try {
-          descriptors[nextKey] = descriptor;
+          Reflect.defineProperty(descriptors, key, {
+            configurable: true,
+            enumerable: true,
+            writable: true,
+            value: descriptor
+          });
         } catch(e) {
-          throw new Error('Unable to create descriptors');
+          throw new Error('Unable to create a data propoerty');
         }
       }
-      // Return descriptors.
+
+      // Return `descriptors`
       return descriptors;
     }
   }
