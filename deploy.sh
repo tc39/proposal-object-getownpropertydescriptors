@@ -25,4 +25,4 @@ git add .
 git commit -m 'automatically generated index.html'
 git push --force
 
-# remember to switch back to master
+git checkout master
