@@ -21,7 +21,7 @@ rm -rf ./*
 echo -n "$INDEX" > index.html
 
 # publish
-git add
+git add .
 git commit -m 'automatically generated index.html'
 git push --force
 

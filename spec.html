@@ -19,8 +19,8 @@ contributors: Andrea Giammarchi
 
   <emu-alg>
     1. Let _obj_ be ?ToObject(_O_).
-    1. Let _keys_ be the result of calling the ?[[[OwnPropertyKeys](https://people.mozilla.org/%7Ejorendorff/es6-draft.html#sec-getownpropertykeys)]] internal method of _obj_.
-    1. Let _descriptors_ be the result of the abstract operation ?[ObjectCreate](https://people.mozilla.org/%7Ejorendorff/es6-draft.html#sec-objectcreate) with the intrinsic object %ObjectPrototype% as its argument.
+    1. Let _keys_ be the result of calling the ?[[OwnPropertyKeys]] internal method of _obj_.
+    1. Let _descriptors_ be the result of the abstract operation ?ObjectCreate with the intrinsic object %ObjectPrototype% as its argument.
     1. Let _gotAllNames_ be __false__.
     1. Repeat while _gotAllNames_ is __false__,
       1. Let _next_ be the result of ?IteratorStep(_keys_).
