@@ -21,10 +21,10 @@ contributors: Andrea Giammarchi
     1. Let _obj_ be ?ToObject(_O_).
     1. Let _keys_ be the result of calling the ?[[OwnPropertyKeys]] internal method of _obj_.
     1. Let _descriptors_ be the result of the abstract operation ?ObjectCreate with the intrinsic object %ObjectPrototype% as its argument.
-    1. Let _gotAllNames_ be __false__.
-    1. Repeat while _gotAllNames_ is __false__,
+    1. Let _gotAllNames_ be _false_.
+    1. Repeat while _gotAllNames_ is _false_,
       1. Let _next_ be the result of ?IteratorStep(_keys_).
-      1. If _next_ is __false__, then let _gotAllNames_ be __true__.
+      1. If _next_ is _false_, then let _gotAllNames_ be _true_.
       1. Else,
         1. Let _nextKey_ be ?IteratorValue(_next_).
         1. Let _nextKey_ be ?ToPropertyKey(_nextKey_).
