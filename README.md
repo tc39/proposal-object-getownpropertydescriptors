@@ -78,7 +78,9 @@ if (!Object.hasOwnProperty('getOwnPropertyDescriptors')) {
 
 ## Illustrative Examples
 
-The polyfill shows an alternative, ES2015 friendly, way that improves the boilerplate needed for engines compatible with ES5 and partially with ES2015, yet it's a very handy boilerplate that could be faster in core and it could simplify real shallow copy or clone between objects through operations like the following:
+The polyfill shows an alternative, ES2015 friendly, way that improves the boilerplate needed for engines compatible with ES5 or partially with ES2015.
+
+Now that `Object.getOwnPropertyDescriptors` is in place, all it's needed in order to make a real shallow copy or clone operation between two objects, is shown in the following example:
 ```js
 const shallowClone = (object) => Object.create(
   Object.getPrototypeOf(object),
