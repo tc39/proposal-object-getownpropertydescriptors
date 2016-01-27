@@ -20,6 +20,7 @@ contributors: Andrea Giammarchi, Jordan Harband
     1. Let _obj_ be ? ToObject(_O_).
     1. Let _ownKeys_ be the result of calling ? _obj_.[[OwnPropertyKeys]]().
     1. Let _descriptors_ be ! ObjectCreate(%ObjectPrototype%).
+    1. Assert: _descriptors_ is an extensible ordinary object with no own properties.
     1. Repeat, for each element _key_ of _ownKeys_ in List order,
       1. Let _desc_ be the result of ? _obj_.[[GetOwnProperty]](_key_).
       1. Let _descriptor_ be ! FromPropertyDescriptor(_desc_).

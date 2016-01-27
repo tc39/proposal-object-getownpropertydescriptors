@@ -38,6 +38,7 @@
 				<li>Let <var>descriptors</var> be !
 					<emu-xref aoid="ObjectCreate"><a href="https://tc39.github.io/ecma262#sec-objectcreate">ObjectCreate</a></emu-xref>(
 					<emu-xref href="#sec-properties-of-the-object-prototype-object"><a href="https://tc39.github.io/ecma262#sec-properties-of-the-object-prototype-object">%ObjectPrototype%</a></emu-xref>).</li>
+				<li>Assert: <var>descriptors</var> is an extensible ordinary object with no own properties.</li>
 				<li>Repeat, for each element <var>key</var> of <var>ownKeys</var> in
 					<emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262#sec-list-and-record-specification-type">List</a></emu-xref> order,
 					<ol>
