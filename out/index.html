@@ -35,16 +35,16 @@
 				<li>Let <var>obj</var> be ?
 					<emu-xref aoid="ToObject"><a href="https://tc39.github.io/ecma262#sec-toobject">ToObject</a></emu-xref>(<var>O</var>).</li>
 				<li>Let <var>ownKeys</var> be the result of calling ? <var>obj</var>.[[OwnPropertyKeys]]().</li>
-				<li>Let <var>descriptors</var> be ?
+				<li>Let <var>descriptors</var> be !
 					<emu-xref aoid="ObjectCreate"><a href="https://tc39.github.io/ecma262#sec-objectcreate">ObjectCreate</a></emu-xref>(
 					<emu-xref href="#sec-properties-of-the-object-prototype-object"><a href="https://tc39.github.io/ecma262#sec-properties-of-the-object-prototype-object">%ObjectPrototype%</a></emu-xref>).</li>
 				<li>Repeat, for each element <var>key</var> of <var>ownKeys</var> in
 					<emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262#sec-list-and-record-specification-type">List</a></emu-xref> order,
 					<ol>
 						<li>Let <var>desc</var> be the result of ? <var>obj</var>.[[GetOwnProperty]](<var>key</var>).</li>
-						<li>Let <var>descriptor</var> be ?
+						<li>Let <var>descriptor</var> be !
 							<emu-xref aoid="FromPropertyDescriptor"><a href="https://tc39.github.io/ecma262#sec-frompropertydescriptor">FromPropertyDescriptor</a></emu-xref>(<var>desc</var>).</li>
-						<li>Let <var>status</var> be the result of ?
+						<li>Let <var>status</var> be the result of !
 							<emu-xref aoid="CreateDataProperty"><a href="https://tc39.github.io/ecma262#sec-createdataproperty">CreateDataProperty</a></emu-xref>(<var>descriptors</var>, <var>key</var>, <var>descriptor</var>).</li>
 					</ol>
 				</li>
