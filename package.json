@@ -23,7 +23,7 @@
 	"author": "Andrea Giammarchi",
 	"license": "MIT",
 	"devDependencies": {
-		"ecmarkup": "^3.0.0",
-		"test262-harness": "^1.2.0"
+		"ecmarkup": "^3.0.1",
+		"test262-harness": "^1.5.6"
 	}
 }
