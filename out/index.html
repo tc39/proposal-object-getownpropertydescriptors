@@ -1,16 +1,57 @@
 <!doctype html>
-<head><meta charset="utf-8">
-<title>Object.getOwnPropertyDescriptors</title><script type="application/json" id="menu-search-biblio">[{"type":"clause","id":"object-get-own-property-descriptors","aoid":null,"title":"Object.getOwnPropertyDescriptors( genericObject )","number":"1","location":"","key":"Object.getOwnPropertyDescriptors( genericObject )"}]</script></head><body><div id="menu-toggle">☰</div><div id="menu"><div id="menu-search"><input type="text" id="menu-search-box" placeholder="Search..."><div id="menu-search-results" class="inactive"></div></div><div id="menu-toc"><ol class="toc"><li><span class="item-toggle-none"></span><a href="#object-get-own-property-descriptors" title="Object.getOwnPropertyDescriptors( genericObject )"><span class="secnum">1</span> Object.getOwnPropertyDescriptors( genericObject )</a></li></ol></div></div><h1 class="version">Stage 0 Draft / January 21, 2016</h1><h1 class="title">Object.getOwnPropertyDescriptors</h1>
-<script src="https://bterlson.github.io/ecmarkup/ecmarkup.js" defer=""></script>
-<link rel="stylesheet" href="https://bterlson.github.io/ecmarkup/elements.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/solarized_light.min.css">
 
-<emu-clause id="object-get-own-property-descriptors">
-  <h1><span class="secnum">1</span>Object.getOwnPropertyDescriptors( genericObject )<span class="utils"><span class="anchor"><a href="#object-get-own-property-descriptors">#</a></span></span></h1>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="./spec.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+	<script src="./spec.js"></script>
+	<title>Object.getOwnPropertyDescriptors</title>
+	<script type="application/json" id="menu-search-biblio">[{"type":"clause","id":"object-get-own-property-descriptors","aoid":null,"title":"Object.getOwnPropertyDescriptors( _O_ )","number":"1","location":"","key":"Object.getOwnPropertyDescriptors( _O_ )"}]</script>
+</head>
 
-  <p>When the getOwnPropertyDescriptors function is called, the following steps are taken:</p>
+<body>
+	<div id="menu-toggle">☰</div>
+	<div id="menu">
+		<div id="menu-search">
+			<input type="text" id="menu-search-box" placeholder="Search...">
+			<div id="menu-search-results" class="inactive"></div>
+		</div>
+		<div id="menu-toc">
+			<ol class="toc">
+				<li><span class="item-toggle-none"></span><a href="#object-get-own-property-descriptors" title="Object.getOwnPropertyDescriptors( _O_ )"><span class="secnum">1</span> Object.getOwnPropertyDescriptors( <var>O</var> )</a></li>
+			</ol>
+		</div>
+	</div>
+	<h1 class="version">Stage 2 Draft / January 27, 2016</h1>
+	<h1 class="title">Object.getOwnPropertyDescriptors</h1>
 
-  <emu-alg><ol><li>Let <var>obj</var> be ? <emu-xref aoid="ToObject"><a href="https://tc39.github.io/ecma262#sec-toobject">ToObject</a></emu-xref>(<var>O</var>).</li><li>Let <var>ownKeys</var> be the result of calling ? <var>obj</var>.[[OwnPropertyKeys]]().</li><li>Let <var>descriptors</var> be ? <emu-xref aoid="ObjectCreate"><a href="https://tc39.github.io/ecma262#sec-objectcreate">ObjectCreate</a></emu-xref>(<emu-xref href="#sec-properties-of-the-object-prototype-object"><a href="https://tc39.github.io/ecma262#sec-properties-of-the-object-prototype-object">%ObjectPrototype%</a></emu-xref>).</li><li>Repeat, for each element <var>key</var> of <var>ownKeys</var> in <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262#sec-list-and-record-specification-type">List</a></emu-xref> order,<ol><li>Let <var>desc</var> be the result of ? <var>obj</var>.[[GetOwnProperty]](<var>key</var>).</li><li>Let <var>descriptor</var> be ? <emu-xref aoid="FromPropertyDescriptor"><a href="https://tc39.github.io/ecma262#sec-frompropertydescriptor">FromPropertyDescriptor</a></emu-xref>(<var>desc</var>).</li><li>Let <var>status</var> be the result of ? <emu-xref aoid="CreateDataProperty"><a href="https://tc39.github.io/ecma262#sec-createdataproperty">CreateDataProperty</a></emu-xref>(<var>descriptors</var>, <var>key</var>, <var>descriptor</var>).</li></ol></li><li>Return <var>descriptors</var>.
-  </li></ol></emu-alg>
+	<emu-clause id="object-get-own-property-descriptors">
+		<h1><span class="secnum">1</span>Object.getOwnPropertyDescriptors( <var>O</var> )<span class="utils"><span class="anchor"><a href="#object-get-own-property-descriptors">#</a></span></span></h1>
 
-</emu-clause></body>
+		<p>When the getOwnPropertyDescriptors function is called, the following steps are taken:</p>
+
+		<emu-alg>
+			<ol>
+				<li>Let <var>obj</var> be ?
+					<emu-xref aoid="ToObject"><a href="https://tc39.github.io/ecma262#sec-toobject">ToObject</a></emu-xref>(<var>O</var>).</li>
+				<li>Let <var>ownKeys</var> be the result of calling ? <var>obj</var>.[[OwnPropertyKeys]]().</li>
+				<li>Let <var>descriptors</var> be ?
+					<emu-xref aoid="ObjectCreate"><a href="https://tc39.github.io/ecma262#sec-objectcreate">ObjectCreate</a></emu-xref>(
+					<emu-xref href="#sec-properties-of-the-object-prototype-object"><a href="https://tc39.github.io/ecma262#sec-properties-of-the-object-prototype-object">%ObjectPrototype%</a></emu-xref>).</li>
+				<li>Repeat, for each element <var>key</var> of <var>ownKeys</var> in
+					<emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.github.io/ecma262#sec-list-and-record-specification-type">List</a></emu-xref> order,
+					<ol>
+						<li>Let <var>desc</var> be the result of ? <var>obj</var>.[[GetOwnProperty]](<var>key</var>).</li>
+						<li>Let <var>descriptor</var> be ?
+							<emu-xref aoid="FromPropertyDescriptor"><a href="https://tc39.github.io/ecma262#sec-frompropertydescriptor">FromPropertyDescriptor</a></emu-xref>(<var>desc</var>).</li>
+						<li>Let <var>status</var> be the result of ?
+							<emu-xref aoid="CreateDataProperty"><a href="https://tc39.github.io/ecma262#sec-createdataproperty">CreateDataProperty</a></emu-xref>(<var>descriptors</var>, <var>key</var>, <var>descriptor</var>).</li>
+					</ol>
+				</li>
+				<li>Return <var>descriptors</var>.
+				</li>
+			</ol>
+		</emu-alg>
+
+	</emu-clause>
+</body>
