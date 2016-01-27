@@ -1,23 +1,23 @@
 {
-  "name": "object.getownpropertydescriptors",
-  "version": "1.0.0",
-  "description": "Tests and a polyfill for the ES proposal for Object.getOwnPropertyDescriptors",
-  "main": "reference-implementation/index.js",
-  "scripts": {
-    "build": "mkdir -p out && ecmarkup spec.html out/index.html",
-    "test": "test262-harness --prelude=reference-implementation/index.js --consoleCommand=\"node --harmony\" --runner=console test/built-ins/Object/getOwnPropertyDescriptors/*.js"
-  },
-  "repository": "WebReflection/Object.getOwnPropertyDescriptors",
-  "keywords": [
-    "ecmascript",
-    "object",
-    "test262",
-    "getownpropertydescriptors"
-  ],
-  "author": "Andrea Giammarchi",
-  "license": "MIT",
-  "devDependencies": {
-    "ecmarkup": "^3.0.0",
-    "test262-harness": "^1.2.0"
-  }
+	"name": "object.getownpropertydescriptors",
+	"version": "1.0.0",
+	"description": "Tests and a polyfill for the ES proposal for Object.getOwnPropertyDescriptors",
+	"main": "reference-implementation/index.js",
+	"scripts": {
+		"build": "mkdir -p out && ecmarkup spec.html out/index.html",
+		"test": "test262-harness --prelude=reference-implementation/index.js --consoleCommand=\"node --harmony\" --runner=console test/built-ins/Object/getOwnPropertyDescriptors/*.js"
+	},
+	"repository": "WebReflection/Object.getOwnPropertyDescriptors",
+	"keywords": [
+		"ecmascript",
+		"object",
+		"test262",
+		"getownpropertydescriptors"
+	],
+	"author": "Andrea Giammarchi",
+	"license": "MIT",
+	"devDependencies": {
+		"ecmarkup": "^3.0.0",
+		"test262-harness": "^1.2.0"
+	}
 }
