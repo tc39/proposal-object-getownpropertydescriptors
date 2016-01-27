@@ -10,7 +10,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/ljharb/proposal-object-getownpropertydescriptors.git"
+		"url": "git+https://github.com/tc39/proposal-object-getownpropertydescriptors.git"
 	},
 	"keywords": [
 		"ecmascript",
