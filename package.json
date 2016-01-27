@@ -15,7 +15,7 @@
     "getownpropertydescriptors"
   ],
   "author": "Andrea Giammarchi",
-  "license": "BSD-2-Clause",
+  "license": "MIT",
   "devDependencies": {
     "ecmarkup": "^3.0.0",
     "test262-harness": "^1.2.0"
