@@ -10,12 +10,9 @@ However the **current** official Champion is **[Jordan Harband](https://github.c
 
 ## Status
 
-This proposal is currently in stage 0 of [the TC39 process](https://github.com/tc39/ecma262/blob/master/stage0.md).
+This proposal is currently in stage 2 of [the TC39 process](https://github.com/tc39/ecma262/).
 
-This proposal could be identical to a `Reflect.getOwnPropertyDescriptors` one but for consistency with other plural versions it's described as `Object` public static method.
-
-
-
+This proposal could be identical to a `Reflect.getOwnPropertyDescriptors` one but for consistency with other plural versions it's described as an `Object` public static method.
 
 ## Motivation
 
@@ -32,22 +29,11 @@ Filtering undesired descriptors would be simpler too, as well as less repetitive
 Last, but not least, a shallow copy between two unknown objects would be free of surprises compared to what `Object.assign` would do.
 
 
-
-
 ## FAQs
 
 ### Should there be a `Reflect.getOwnPropertyDescriptors` ?
 
 Since the main goal of this proposal is to simplify some common boilerplate and be consistent with the fact there is a singular version of the method but not a plural one, it might be further consistent to have the plural version of the current [Reflect.getOwnPropertyDescriptor](http://www.ecma-international.org/ecma-262/6.0/#sec-reflect.getownpropertydescriptor) method too.
-
-
-### Should the returned `descriptors` object be created from `null` instead of `Object.prototype` ?
-As mentioned in issue #5, it might look better to return an object that inherits `null` instead of `{}` but it won't conretely bring any real-world benefit to developers.
-When it comes to descriptors, specs are clear that it's about own properties, and not inherited one.
-What is problematic is either the data descriptor or the accessor one, both possibly influenced by inheritance so that `Object.prototype.writable = true` would make every accessor fail due presence or a `writable` field in its chain.
-
-Accordingly, I don't believe starting from a `null` object is needed since it won't fix the problem within each descriptor but it will easily be on developers way when it comes to debug such object or use `hasOwnProperty` while filtering or modifying it.
-
 
 
 ## Proposed Solution
