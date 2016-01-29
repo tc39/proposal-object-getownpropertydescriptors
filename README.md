@@ -1,4 +1,4 @@
-# `Object.getOwnPropertyDescriptors` Proposal
+# `Object.getOwnPropertyDescriptors` Proposal ([Polyfill](https://www.npmjs.com/package/object.getownpropertydescriptors))
 
 
 ## Champion
@@ -10,7 +10,7 @@ However the **current** official Champion is **[Jordan Harband](https://github.c
 
 ## Status
 
-This proposal is currently in stage 2 of [the TC39 process](https://github.com/tc39/ecma262/).
+This proposal is currently in stage 3 of [the TC39 process](https://github.com/tc39/ecma262/).
 
 This proposal could be identical to a `Reflect.getOwnPropertyDescriptors` one but for consistency with other plural versions it's described as an `Object` public static method.
 
