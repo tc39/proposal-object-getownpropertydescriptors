@@ -51,9 +51,10 @@ if (!Object.hasOwnProperty('getOwnPropertyDescriptors')) {
       writable: true,
       value: function getOwnPropertyDescriptors(object) {
         return Reflect.ownKeys(object).reduce((descriptors, key) => {
-          let descriptor = Object.getOwnPropertyDescriptor(object, key);
-          descriptors[key] = descriptor;
-          return descriptors;
+          return Object.defineProperty(
+            descriptors, key,
+            Object.getOwnPropertyDescriptor(object, key)
+          );
         }, {});
       }
     }
