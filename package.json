@@ -24,7 +24,7 @@
 	"license": "MIT",
 	"devDependencies": {
 		"ecmarkup": "^3.0.1",
-		"js-beautify": "^1.5.10",
+		"js-beautify": "^1.6.2",
 		"test262-harness": "^1.5.6"
 	}
 }
