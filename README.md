@@ -10,7 +10,7 @@ However the **current** official Champion is **[Jordan Harband](https://github.c
 
 ## Status
 
-This proposal is currently in stage 3 of [the TC39 process](https://github.com/tc39/ecma262/).
+This proposal is currently in [stage 4](https://github.com/tc39/proposals/blob/master/finished-proposals.md) of [the TC39 process](https://github.com/tc39/ecma262/).
 
 This proposal could be identical to a `Reflect.getOwnPropertyDescriptors` one but for consistency with other plural versions it's described as an `Object` public static method.
 
@@ -34,6 +34,8 @@ Last, but not least, a shallow copy between two unknown objects would be free of
 ### Should there be a `Reflect.getOwnPropertyDescriptors` ?
 
 Since the main goal of this proposal is to simplify some common boilerplate and be consistent with the fact there is a singular version of the method but not a plural one, it might be further consistent to have the plural version of the current [Reflect.getOwnPropertyDescriptor](http://www.ecma-international.org/ecma-262/6.0/#sec-reflect.getownpropertydescriptor) method too.
+
+Update: The committee has previously decided that `Reflect` is solely to mirror `Proxy` traps, so this is not an option.
 
 
 ## Proposed Solution
