@@ -25,7 +25,7 @@ Object.defineProperty(
       }
 
       // Let `ownKeys` be the result of calling ? `obj.[[OwnPropertyKeys]]()`
-      let ownKeys; 
+      let ownKeys;
       try {
         ownKeys = Reflect.ownKeys(genericObject);
       } catch(e) {
@@ -47,16 +47,18 @@ Object.defineProperty(
         // Let `descriptor` be ? `FromPropertyDescriptor(desc)`
         let descriptor = Reflect.getOwnPropertyDescriptor(genericObject, key);
 
-        // Let `status` be the result of ? `CreateDataProperty(descriptors, key, descriptor)`
-        try {
-          Reflect.defineProperty(descriptors, key, {
-            configurable: true,
-            enumerable: true,
-            writable: true,
-            value: descriptor
-          });
-        } catch(e) {
-          throw new Error('Unable to create a data propoerty');
+        if (typeof descriptor !== 'undefined') {
+          // Let `status` be the result of ? `CreateDataProperty(descriptors, key, descriptor)`
+          try {
+            Reflect.defineProperty(descriptors, key, {
+              configurable: true,
+              enumerable: true,
+              writable: true,
+              value: descriptor
+            });
+          } catch(e) {
+            throw new Error('Unable to create a data propoerty');
+          }
         }
       }
 
