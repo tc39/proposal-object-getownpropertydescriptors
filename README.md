@@ -19,9 +19,9 @@ This proposal could be identical to a `Reflect.getOwnPropertyDescriptors` one bu
 There is not a single method in ECMAScript capable of simplifying a proper copy between two objects.
 In these days more than ever, where functional programming and immutable objects are essential parts of complex applications, every framework or library is implementing its own boilerplate in order to properly copy properties between composed objects or prototypes.
 
-There is a lot of confusion and most of the time undesired behavior when it comes to fallback to `Object.assign` because it copies in a shallow way, accessing directly properties and symbols instead of their descriptors, discarding possible accessors which could result into an hazard when it come to compose more complex objects or classes' prototypes.
+There is a lot of confusion and most of the time undesired behavior when it comes to fallback to `Object.assign` because it copies in a way that swallows behavior: it directly accesses properties and symbols instead of their descriptors, discarding possible accessors which could result into an hazard when it come to composing more complex objects or classes’ prototypes.
 
-Retrieving all descriptors, enumerables or not, is also key to implement composition over classes and their prototypes, since by default have non enumerable methods or accessors.
+Retrieving all descriptors, enumerable or not, is also key to implementing composition over `class`es and their prototypes, since by default they have non-enumerable methods and accessors.
 
 Also decorators could easily grab at once all descriptors from another class or mixin and assign them through `Object.defineProperties`.
 Filtering undesired descriptors would be simpler too, as well as less repetitive each time is needed.
