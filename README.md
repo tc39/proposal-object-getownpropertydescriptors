@@ -92,7 +92,7 @@ Possible objects based mixin solutions could also benefit from this proposal:
 ```js
 let mix = (object) => ({
   with: (...mixins) => mixins.reduce(
-    (c, mixin) => Object.create(
+    (c, mixin) => Object.defineProperties(
       c, Object.getOwnPropertyDescriptors(mixin)
     ), object)
 });
